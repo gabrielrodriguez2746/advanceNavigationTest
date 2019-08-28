@@ -19,6 +19,13 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.example.android.navigationadvancedsample">
 
+    <!-- Strip away maxSdkVersion -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:remove="android:maxSdkVersion"/>
+
+    <!-- Add the permission with no maxSdkVersion defined -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

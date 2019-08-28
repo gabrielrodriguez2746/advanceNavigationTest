@@ -10,10 +10,9 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
-class RegisterTest {
+class RegisterTest : SpoonTest() {
 
-    lateinit var scenario: ActivityScenario<MainActivity>
+    private lateinit var scenario: ActivityScenario<MainActivity>
 
     @Before
     fun setup() {

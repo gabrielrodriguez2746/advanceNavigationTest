@@ -25,6 +25,10 @@ buildscript {
     }
     repositories {
         google()
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    }
+    dependencies {
+        classpath "com.jaredsburrows:gradle-spoon-plugin:1.5.0"
     }
 }
 

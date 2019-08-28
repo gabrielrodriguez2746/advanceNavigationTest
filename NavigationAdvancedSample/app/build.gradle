@@ -17,6 +17,7 @@
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
+apply plugin: 'com.jaredsburrows.spoon'
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -68,6 +69,14 @@ dependencies {
     androidTestImplementation deps.espresso.core
     androidTestImplementation deps.espresso.contrib
     androidTestImplementation deps.espresso.intents
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation "androidx.test.ext:junit:1.1.1"
+    androidTestImplementation "com.squareup.spoon:spoon-client:2.0.0-SNAPSHOT"
+    androidTestImplementation "com.jraska:falcon:2.1.1"
+    androidTestImplementation "com.jraska:falcon-spoon-compat:2.1.1"
 
+}
+
+spoon {
+    clearAppDataBeforeEachTest = true
+    className = "com.example.android.RegisterTest"
 }
