@@ -68,5 +68,6 @@ dependencies {
     androidTestImplementation deps.espresso.core
     androidTestImplementation deps.espresso.contrib
     androidTestImplementation deps.espresso.intents
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
 
 }
