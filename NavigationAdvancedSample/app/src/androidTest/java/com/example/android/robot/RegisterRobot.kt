@@ -1,11 +1,6 @@
 package com.example.android.robot
 
-import androidx.test.espresso.Espresso
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.typeText
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.Espresso.closeSoftKeyboard
 import com.example.android.SpoonTest
 import com.example.android.navigationadvancedsample.R
 
@@ -13,9 +8,16 @@ class RegisterRobot : Robot() {
 
     override val robotName: String = "register"
 
+    companion object {
+        private const val PASSWORD_FIELD = R.id.password_text
+        private const val USERNAME_FIELD = R.id.username_text
+        private const val EMAIL_FIELD = R.id.email_text
+        private const val SIGN_UP_BUTTON = "SIGN UP"
+        private const val SELECT_AVATAR_TITLE = "Select an Avatar"
+    }
+
     fun validateSelectAvatarIsDisplayed() {
-        onView(withText("Select an Avatar"))
-                .check(matches(isDisplayed()))
+        SELECT_AVATAR_TITLE shouldBe displayed
     }
 
     fun enterCredentials(name: String,
@@ -26,33 +28,29 @@ class RegisterRobot : Robot() {
     }
 
     private fun enterPassword(password: String) {
-        onView(withId(R.id.password_text)).perform(click())
-        onView(withId(R.id.password_text))
-                .perform(typeText(password))
-        Espresso.closeSoftKeyboard()
+        click on PASSWORD_FIELD
+        type(password) into PASSWORD_FIELD
+        closeSoftKeyboard()
         takeScreenshot("enter password")
     }
 
     private fun enterEmail(email: String) {
-        onView(withId(R.id.email_text)).perform(click())
-        onView(withId(R.id.email_text))
-                .perform(typeText(email))
-        Espresso.closeSoftKeyboard()
+        click on EMAIL_FIELD
+        type(email) into EMAIL_FIELD
+        closeSoftKeyboard()
         takeScreenshot("enter email")
     }
 
     private fun enterName(name: String) {
-        onView(withId(R.id.username_text)).perform(click())
-        onView(withId(R.id.username_text))
-                .perform(typeText(name))
-        Espresso.closeSoftKeyboard()
+        click on USERNAME_FIELD
+        type(name) into USERNAME_FIELD
+        closeSoftKeyboard()
         takeScreenshot("enter name")
 
     }
 
     fun signUp() {
-        onView(withText("SIGN UP"))
-                .perform(click())
+        click on SIGN_UP_BUTTON
         takeScreenshot("sign up")
     }
 
