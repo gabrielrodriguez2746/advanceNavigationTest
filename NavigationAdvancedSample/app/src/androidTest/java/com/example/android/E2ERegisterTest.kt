@@ -1,20 +1,25 @@
 package com.example.android
 
 import androidx.test.core.app.ActivityScenario
-import com.example.android.navigationadvancedsample.MainActivity
+import com.example.android.navigationadvancedsample.login.LoginActivity
 import com.example.android.robot.home
+import com.example.android.robot.login
 import com.example.android.robot.register
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-class RegisterTest : SpoonTest() {
+class E2ERegisterTest : SpoonTest() {
 
-    private lateinit var scenario: ActivityScenario<MainActivity>
+    private lateinit var scenario: ActivityScenario<LoginActivity>
 
     @Before
     fun setup() {
-        scenario = ActivityScenario.launch(MainActivity::class.java)
+        scenario = ActivityScenario.launch(LoginActivity::class.java)
+        login {
+            enterCredentials("Gabriel", "gabriel.rodriguez3103@gmail.com", "123456")
+            login()
+        }
         home { clickRegisterTab() }
     }
 
@@ -22,8 +27,7 @@ class RegisterTest : SpoonTest() {
     fun testRegister() {
         register {
             validateSelectAvatarIsDisplayed()
-            enterCredentials("Gabriel",
-                    "gabriel.rodriguez3103@gmail.com", "123456")
+            enterCredentials("Gabriel", "gabriel.rodriguez3103@gmail.com", "123456")
             signUp()
         }
     }
@@ -32,4 +36,5 @@ class RegisterTest : SpoonTest() {
     fun tearDown() {
         scenario.close()
     }
+
 }

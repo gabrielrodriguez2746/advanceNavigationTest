@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2019, The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,15 +15,16 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.example.android.navigationadvancedsample">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.android.navigationadvancedsample">
 
     <!-- Strip away maxSdkVersion -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:remove="android:maxSdkVersion"/>
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:remove="android:maxSdkVersion" />
 
     <!-- Add the permission with no maxSdkVersion defined -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -35,13 +35,15 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name="com.example.android.navigationadvancedsample.MainActivity">
+            <!-- This is added to handle a deep link -->
+            <nav-graph android:value="@navigation/list" />
+        </activity>
+        <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <!-- This is added to handle a deep link -->
-            <nav-graph android:value="@navigation/list" />
         </activity>
     </application>
 
