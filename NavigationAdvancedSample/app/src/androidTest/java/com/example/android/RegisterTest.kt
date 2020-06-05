@@ -19,7 +19,7 @@ class RegisterTest : SpoonTest() {
     }
 
     @Test
-    fun testRegister() {
+    fun register_test() {
         register {
             validateSelectAvatarIsDisplayed()
             enterCredentials("Gabriel",

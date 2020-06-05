@@ -26,7 +26,7 @@ class RegisterTargetedTest : SpoonTest() {
     }
 
     @Test
-    fun testRegister() {
+    fun register_segmented_test() {
         register {
             validateSelectAvatarIsDisplayed()
             enterCredentials("Gabriel",

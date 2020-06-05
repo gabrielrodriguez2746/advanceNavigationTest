@@ -24,7 +24,7 @@ class E2ERegisterTest : SpoonTest() {
     }
 
     @Test
-    fun testRegister() {
+    fun login_register_test() {
         register {
             validateSelectAvatarIsDisplayed()
             enterCredentials("Gabriel", "gabriel.rodriguez3103@gmail.com", "123456")

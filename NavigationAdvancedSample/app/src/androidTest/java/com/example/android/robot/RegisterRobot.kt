@@ -1,6 +1,6 @@
 package com.example.android.robot
 
-import androidx.test.espresso.Espresso.closeSoftKeyboard
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.example.android.SpoonTest
 import com.example.android.navigationadvancedsample.R
 
@@ -8,12 +8,12 @@ class RegisterRobot : Robot() {
 
     override val robotName: String = "register"
 
-    companion object {
-        private const val PASSWORD_FIELD = R.id.password_text
-        private const val USERNAME_FIELD = R.id.username_text
-        private const val EMAIL_FIELD = R.id.email_text
-        private const val SIGN_UP_BUTTON = "SIGN UP"
-        private const val SELECT_AVATAR_TITLE = "Select an Avatar"
+    companion object ViewElements {
+        private val PASSWORD_FIELD = ViewElement(R.id.password_text)
+        private val USERNAME_FIELD = ViewElement(R.id.username_text)
+        private val EMAIL_FIELD = ViewElement(R.id.email_text)
+        private val SIGN_UP_BUTTON = ViewElement(withText(R.string.sign_up))
+        private val SELECT_AVATAR_TITLE = ViewElement(withText(R.string.select_an_avatar))
     }
 
     fun validateSelectAvatarIsDisplayed() {
@@ -28,23 +28,17 @@ class RegisterRobot : Robot() {
     }
 
     private fun enterPassword(password: String) {
-        click on PASSWORD_FIELD
         type(password) into PASSWORD_FIELD
-        closeSoftKeyboard()
         takeScreenshot("enter password")
     }
 
     private fun enterEmail(email: String) {
-        click on EMAIL_FIELD
         type(email) into EMAIL_FIELD
-        closeSoftKeyboard()
         takeScreenshot("enter email")
     }
 
     private fun enterName(name: String) {
-        click on USERNAME_FIELD
         type(name) into USERNAME_FIELD
-        closeSoftKeyboard()
         takeScreenshot("enter name")
 
     }

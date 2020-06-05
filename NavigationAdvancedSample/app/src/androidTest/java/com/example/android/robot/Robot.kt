@@ -3,13 +3,8 @@ package com.example.android.robot
 import android.app.Activity
 import android.view.View
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.ViewAction
-import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import androidx.test.runner.lifecycle.Stage
@@ -20,7 +15,7 @@ typealias ViewMatcher = Matcher<View>
 
 abstract class Robot {
 
-    val click: ViewAction = ViewActions.click()
+    val click: RobotAction = RobotAction.Click
     val displayed: ViewMatcher = ViewMatchers.isDisplayed()
 
     lateinit var falconRule: FalconSpoonRule
@@ -35,27 +30,7 @@ abstract class Robot {
         falconRule.screenshot(currentActivity, validTag)
     }
 
-    fun type(text: String): ViewAction = typeText(text)
-
-    infix fun ViewAction.on(id: Int) {
-        onView(withId(id)).perform(this)
-    }
-
-    infix fun ViewAction.on(text: String) {
-        onView(withText(text)).perform(this)
-    }
-
-    infix fun ViewAction.into(id: Int) {
-        onView(withId(id)).perform(this)
-    }
-
-    infix fun Int.shouldBe(matcher: ViewMatcher) {
-        onView(withId(this)).check(ViewAssertions.matches(matcher))
-    }
-
-    infix fun String.shouldBe(matcher: ViewMatcher) {
-        onView(withText(this)).check(ViewAssertions.matches(matcher))
-    }
+    fun type(text: String): RobotAction = RobotAction.TypeText(text)
 
     private fun getCurrentActivityInstance(): Activity? {
         val activity = arrayOfNulls<Activity>(1)
@@ -72,6 +47,18 @@ abstract class Robot {
     private fun getActivitiesCollection(): Collection<Activity> {
         return (ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED).takeIf { it.isNotEmpty() }
                 ?: ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.PAUSED))
+    }
+
+    infix fun RobotAction.on(element: ViewElement) {
+        onView(element.matcher).perform(*this.actions)
+    }
+
+    infix fun RobotAction.into(element: ViewElement) {
+        onView(element.matcher).perform(*this.actions)
+    }
+
+    infix fun ViewElement.shouldBe(matcher: ViewMatcher) {
+        onView(this.matcher).check(ViewAssertions.matches(matcher))
     }
 
 }
